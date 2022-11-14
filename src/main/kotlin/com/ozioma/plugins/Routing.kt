@@ -1,7 +1,6 @@
 package com.ozioma.plugins
 
-import com.ozioma.data.request.GetBestBlockHash
-import com.ozioma.data.request.GetBlock
+
 import com.ozioma.data.request.RequestBodyHelper
 import io.ktor.client.*
 import io.ktor.client.call.*
