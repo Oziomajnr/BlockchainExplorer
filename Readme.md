@@ -11,3 +11,7 @@ gradlew assemble
 
 if permission is denied, run
 chmod 755 gradlew first  before gradlew assemble
+
+this would build a .jar file that in the build folder that you can then run using
+
+    java -jar /build/libs/com.ozioma.bitcoinexplorer-all.jar
