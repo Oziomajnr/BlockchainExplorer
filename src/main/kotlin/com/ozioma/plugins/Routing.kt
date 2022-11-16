@@ -14,6 +14,7 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.freemarker.*
 
 fun Application.configureRouting() {
 
@@ -36,15 +37,13 @@ fun Route.blockChainRouting(){
              call.respondText(
                 "Block related apis /{blockHash} /hash/{blockNumber} /hash/best")
         }
-        get("/{blockHash}/") {
+        get("/full/{blockHash}/") {
             val blockHash = call.parameters["blockHash"] ?: return@get call.respondText(
                 "Missing blockHash",
                 status = HttpStatusCode.BadRequest
             )
-            val response = BlockChainApi.executeBlockchainRequest(RequestBodyHelper.getBlock(blockHash))
-            println("response is ")
-            println(response.bodyAsText())
-            call.respondText(response.bodyAsText(), status = response.status)
+            val response = BlockChainApi.getBlock(blockHash)
+            call.respondTemplate("index.ftl", mapOf("result" to response.result))
         }
 
         get("/hash/{blockNumber}/") {
@@ -64,6 +63,18 @@ fun Route.blockChainRouting(){
             val response = BlockChainApi.executeBlockchainRequest(body)
 
             call.respondText(response.bodyAsText(), status = response.status)
+        }
+    }
+
+
+    route("/txs") {
+        get("/{transactionHash}/") {
+            val transactionHash = call.parameters["transactionHash"] ?: return@get call.respondText(
+                "Missing blockHash",
+                status = HttpStatusCode.BadRequest
+            )
+            val response = BlockChainApi.getTransaction(transactionHash)
+            call.respond(response)
         }
     }
 }

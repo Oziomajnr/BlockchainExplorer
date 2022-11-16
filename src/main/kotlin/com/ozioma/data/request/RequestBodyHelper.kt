@@ -12,4 +12,7 @@ object RequestBodyHelper {
     fun getBestBlockHash(): String {
         return "{\"method\":\"getbestblockhash\"}"
     }
+    fun getTransaction(transactionHash: String): String {
+        return "{ \"method\":\"gettransaction\", \"params\": [\"$transactionHash\"] }"
+    }
 }

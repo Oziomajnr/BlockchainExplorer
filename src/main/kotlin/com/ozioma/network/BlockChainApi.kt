@@ -1,6 +1,9 @@
 package com.ozioma.network
 
+import com.ozioma.data.request.BlockChainResult
+import com.ozioma.data.request.RequestBodyHelper
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -9,11 +12,10 @@ import io.ktor.http.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import io.ktor.serialization.kotlinx.json.*
-import kotlinx.coroutines.delay
 
 object BlockChainApi {
    suspend fun executeBlockchainRequest(body: String): HttpResponse{
-        val response = httpClient.post("http://127.0.0.1:18332/") {
+        return httpClient.post("http://127.0.0.1:18332/") {
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
             setBody(body)
@@ -22,7 +24,16 @@ object BlockChainApi {
             }
 
         }
-       return response
+    }
+
+    suspend fun getBlock(blockHash: String): BlockChainResult {
+        val response = executeBlockchainRequest(RequestBodyHelper.getBlock(blockHash))
+        return response.body()
+    }
+
+    suspend fun getTransaction(transactionHash: String): String {
+        val response = executeBlockchainRequest(RequestBodyHelper.getTransaction(transactionHash))
+        return response.bodyAsText()
     }
 }
 
@@ -34,6 +45,7 @@ private fun createClient(): HttpClient {
             json(Json {
                 prettyPrint = true
                 isLenient = true
+                ignoreUnknownKeys = true
             })
         }
 
