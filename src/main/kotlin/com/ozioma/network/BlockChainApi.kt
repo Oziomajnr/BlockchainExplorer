@@ -15,7 +15,7 @@ import io.ktor.serialization.kotlinx.json.*
 
 object BlockChainApi {
    suspend fun executeBlockchainRequest(body: String): HttpResponse{
-        return httpClient.post("http://127.0.0.1:18332/") {
+        return httpClient.post("http://127.0.0.1:8332/") {
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
             setBody(body)

@@ -76,7 +76,7 @@ More
 <div class="bg-white rounded-md filter drop-shadow">
 <div class="px-4 py-2 border-b border-gray-200">
 <h3 class="font-semibold truncate">
-TX # <a href="/txs/${transaction.txid}" class="text-purple-500">${transaction.hash}</a>
+TX # <a href="/txs/${transaction.hash}" class="text-purple-500">${transaction.hash}</a>
 </h3>
 </div>
 <div class="p-4">
