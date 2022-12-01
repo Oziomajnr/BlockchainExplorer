@@ -4,6 +4,7 @@ val logback_version: String by project
 
 plugins {
     application
+    id("application")
     kotlin("jvm") version "1.7.21"
     id("io.ktor.plugin") version "2.1.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.21"
@@ -34,5 +35,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-server-freemarker:$ktor_version")
-
+    implementation("com.slack.api:slack-api-client:1.27.2")
+    implementation("com.slack.api:slack-api-model-kotlin-extension:1.27.2")
+    implementation("com.slack.api:slack-api-client-kotlin-extension:1.27.2")
 }
