@@ -1,4 +1,4 @@
-Goal: take block has as input and get all the block information represented on a UI.
+Goal: Take block hash as input and get all the block information represented on a UI.
 
 How to use
 
@@ -13,7 +13,7 @@ par=1
 maxuploadtarget=137
 maxconnections=16
 rpcuser=ozioma
-rpcpassword=daniel
+rpcpassword=password
 rpcallowip=127.0.0.1
 debug=tor
 prune=550
